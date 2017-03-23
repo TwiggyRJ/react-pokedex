@@ -1,0 +1,35 @@
+.container {
+  max-width: 1450px;
+  margin: 0 auto;
+  padding: 0 20px; }
+
+.pad-10 {
+  padding: 10px; }
+
+.margin-top-15 {
+  margin-top: 15px; }
+
+.left {
+  float: left; }
+
+.right {
+  float: right; }
+
+.align-left {
+  text-align: left; }
+
+.align-right {
+  text-align: right; }
+
+.inline {
+  display: inline-block; }
+
+.input-large {
+  font-size: 1.4rem;
+  width: 25vw; }
+
+.pokedex-table .table-heading {
+  font-size: 1.2rem; }
+
+.pokedex-table td {
+  text-align: center; }

@@ -1,0 +1,49 @@
+.bg-black {
+  background-color: #222; }
+
+.bg-white {
+  background-color: #fff; }
+
+.bg-green {
+  background-color: #4CAF50; }
+
+.black {
+  color: #222; }
+
+.white {
+  color: #fff; }
+
+.full {
+  width: 100%; }
+
+.half {
+  width: 50%; }
+
+.App {
+  text-align: center; }
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px; }
+
+.App-header {
+  background-color: #222;
+  height: 250px;
+  padding: 20px;
+  color: white; }
+
+.App-intro {
+  font-size: large; }
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%); }
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
