@@ -1,18 +1,3 @@
-.bg-black {
-  background-color: #222; }
-
-.bg-white {
-  background-color: #fff; }
-
-.bg-green {
-  background-color: #4CAF50; }
-
-.black {
-  color: #222; }
-
-.white {
-  color: #fff; }
-
 .full {
   width: 100%; }
 
@@ -47,3 +32,44 @@
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
+
+.bg-normal,
+.bg-black {
+  background-color: #222; }
+
+.bg-white {
+  background-color: #fff; }
+
+.bg-grass,
+.bg-green {
+  background-color: #43A047; }
+
+.bg-psychic {
+  background-color: #D81B60; }
+
+.bg-water {
+  background-color: #1E88E5; }
+
+.bg-ice {
+  background-color: #29B6F6; }
+
+.bg-dragon {
+  background-color: #4527A0; }
+
+.bg-fire {
+  background-color: #F4511E; }
+
+.bg-bug {
+  background-color: #8D6E63; }
+
+.bg-poison {
+  background-color: #D500F9; }
+
+.bg-electric {
+  background-color: #FDD835; }
+
+.black {
+  color: #222; }
+
+.white {
+  color: #fff; }

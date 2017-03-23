@@ -50,18 +50,23 @@ class Page extends Component {
   }
 
   searchPokemon(e) {
-    let id = e.target.value;
-    this.getData(this.state.pokemonUrl+id, 'pokemon');
+    let search = e.target.value;
+    search = search.toLowerCase();
+    this.getData(this.state.pokemonUrl + search, 'pokemon');
   }
 
   render() {
     if (this.state.pokemon !== "") {
-      let types = this.state.pokemon.types;
+      let types = this.state.pokemon.types.reverse();
       let type = [];
       let next = this.state.pokemon.id + 1;
       let prev = this.state.pokemon.id - 1;
+      let primaryType;
 
       types.forEach(function (val, i) {
+        if (i == 0) {
+          primaryType = val.type.name;
+        }
         type.push(val.type.name + " ");
       });
 
@@ -73,7 +78,7 @@ class Page extends Component {
           transitionEnter={false}
           transitionLeave={false}>
             <div className="App">
-              <div className="App-header">
+              <div className={"App-header bg-" + primaryType }>
                 <img src={ this.state.pokemon.sprites.front_default } alt="logo" />
                 <div className="">
                   <a className="left white" href="#" data-id={prev} onClick={ this.navigatePokemon }>Prev</a> <h2 className="inline">{ this.state.pokemon.name }</h2> <a className="right white" href="#" data-id={next} onClick={ this.navigatePokemon }>Next</a>

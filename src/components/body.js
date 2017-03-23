@@ -84,6 +84,38 @@ class Body extends Component {
             { moves }
           </tbody>
         </table>
+
+        <table className="full pokedex-table margin-top-15">
+          <tbody>
+            <tr className="full">
+              <th className="bg-green white table-heading pad-10" colSpan="8">Sprites</th>
+            </tr>
+            <tr>
+              <th className="bg-green white table-heading pad-10" colSpan="4">Back</th>
+              <th className="bg-green white table-heading pad-10" colSpan="4">Front</th>
+            </tr>
+            <tr>
+              <th>Male</th>
+              <th>Female</th>
+              <th>Shiny Male</th>
+              <th>Shiny Female</th>
+              <th>Male</th>
+              <th>Female</th>
+              <th>Shiny Male</th>
+              <th>Shiny Female</th>
+            </tr>
+            <tr>
+              <td><img src={ this.props.pokemon.sprites.back_default } /></td>
+              <td><img src={ this.props.pokemon.sprites.back_female } /></td>
+              <td><img src={ this.props.pokemon.sprites.back_shiny } /></td>
+              <td><img src={ this.props.pokemon.sprites.back_shiny_female } /></td>
+              <td><img src={ this.props.pokemon.sprites.front_default } /></td>
+              <td><img src={ this.props.pokemon.sprites.front_female } /></td>
+              <td><img src={ this.props.pokemon.sprites.front_shiny } /></td>
+              <td><img src={ this.props.pokemon.sprites.front_shiny_female } /></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     );
   }
