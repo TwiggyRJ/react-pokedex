@@ -122,7 +122,26 @@ class Page extends Component {
   cacheData(key, data) {
     if(window.localStorage) {
       var object = { [key]: data, timestamp: new Date().getTime()}
-      localStorage.setItem(key, JSON.stringify(object));
+      try {
+        localStorage.setItem(key, JSON.stringify(object));
+      }
+      catch(err) {
+        // Just grab the expiry and store the expiry-key into an object
+        let expiries = Object.keys(localStorage).reduce(function(collection,key) {
+          let currentExpirationTime = JSON.parse(localStorage.getItem(key)).timestamp;
+          collection[currentExpirationTime] = key;
+          return collection;
+        },{});
+
+        // Get the expiry dates into an array
+        let expiryDates = Object.keys(expiries);
+
+        // For N times, find the oldest (smallest timestamp) and destroy
+        for(let i = 0; i < 1; i++){
+          let oldestDate = Math.min.apply(null,expiryDates);
+          localStorage.removeItem(expiries[oldestDate]);
+        }
+      }
     }
   }
 
