@@ -1,6 +1,6 @@
 .bg-normal,
-.bg-black {
-  background-color: $black;
+.bg-dark-grey {
+  background-color: $dark-grey;
 }
 
 .bg-white {
@@ -42,6 +42,23 @@
 
 .bg-electric {
   background-color: $yellow;
+}
+
+.bg-ground {
+  background-color: $light-orange;
+}
+
+.bg-dark,
+.bg-black {
+  background-color: $black;
+}
+
+.bg-ghost {
+  background-color: $light-indigo;
+}
+
+.bg-flying {
+  background-color: $light-dp-purple;
 }
 
 .black {

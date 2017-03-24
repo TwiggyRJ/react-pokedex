@@ -8,6 +8,13 @@ class DispatcherClass extends Dispatcher {
       action: action,
     });
   }
+
+  handleServerAction = function(action) {
+    this.dispatch({
+      source: 'SERVER_ACTION',
+      action: action
+    });
+  }
 }
 
 const AppDispatcher = new DispatcherClass();

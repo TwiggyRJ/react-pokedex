@@ -5,17 +5,39 @@ import './loading.css';
 import pokeball from './Pokeball.svg';
 import Body from './components/body';
 
+import PokemonStore from './stores/PokemonStore';
+import { getPokeData, storeItem } from './actions/PokemonActions';
+
 class Page extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {pokemon: '', pokemonUrl: '/api/v2/pokemon/'};
+    this.state = PokemonStore.getPokemon();
     this.navigatePokemon = this.navigatePokemon.bind(this);
     this.searchPokemon = this.searchPokemon.bind(this);
+    this.getPokemon = this.getPokemon.bind(this);
+    this._onChange = this._onChange.bind(this);
+    this.cacheData = this.cacheData.bind(this);
+    this.ajax = this.ajax.bind(this);
+    this.processAjax = this.processAjax.bind(this);
   }
 
   componentWillMount() {
     this.getData(this.state.pokemonUrl + this.props.default, 'pokemon');
+  }
+
+  componentDidMount() {
+    PokemonStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount() {
+    PokemonStore.removeChangeListener(this._onChange);
+  }
+
+  _onChange(target, value) {
+    this.setState({
+      [target]: value
+    }, () => console.log(this.state));
   }
 
   shouldComponentUpdate() {
@@ -28,18 +50,54 @@ class Page extends Component {
   }
 
   getData(toGet, value) {
+
+    if(window.localStorage) {
+      console.log('localStorage FTW');
+      if (localStorage.getItem(toGet) === null) {
+        this.ajax(toGet, value);
+      } else {
+        let item = JSON.parse(localStorage.getItem(toGet)),
+        itemCreated = new Date(item.timestamp),
+        now = new Date().getTime(),
+        lastWeek = new Date(now - 7 * 24 * 60 * 60 * 1000);
+        console.log(now);
+
+        if (itemCreated > lastWeek) {
+          let data = item[toGet];
+          this._onChange(value, data);
+          this.getPokemon(data);
+        } else {
+          localStorage.removeItem(toGet);
+          this.ajax(toGet, value);
+        }
+      }
+    } else {
+      this.ajax(toGet);
+    }
+
+  }
+
+  ajax(toGet, key) {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://pokeapi.co' + toGet, true);
+    xhr.open('GET', 'https://pokeapi.co' + toGet, true);
     xhr.onload = () => {
         if(xhr.status === 200) {
             console.log('Yay it works');
-            console.log(JSON.parse(xhr.response));
-            this.setState({[value]: JSON.parse(xhr.response)}, () => console.log(this.state));
+            let data = JSON.parse(xhr.response);
+            console.log(data);
+            this.processAjax(toGet, key, data);
         } else if (xhr.status === 400) {
             console.log('Bad Request :(');
         }
     };
     xhr.send();
+  }
+
+  processAjax(endpoint, key, data) {
+    this.cacheData(endpoint, data);
+    this._onChange(key, data);
+    this.getPokemon(data);
+    console.log(data);
   }
 
   navigatePokemon(e) {
@@ -55,8 +113,21 @@ class Page extends Component {
     this.getData(this.state.pokemonUrl + search, 'pokemon');
   }
 
+  getPokemon(data) {
+    console.log(data);
+    getPokeData(data);
+  }
+
+
+  cacheData(key, data) {
+    if(window.localStorage) {
+      var object = { [key]: data, timestamp: new Date().getTime()}
+      localStorage.setItem(key, JSON.stringify(object));
+    }
+  }
+
   render() {
-    if (this.state.pokemon !== "") {
+    if (this.state.pokemon !== '') {
       let types = this.state.pokemon.types.reverse();
       let type = [];
       let next = this.state.pokemon.id + 1;
@@ -64,7 +135,7 @@ class Page extends Component {
       let primaryType;
 
       types.forEach(function (val, i) {
-        if (i == 0) {
+        if (i === 0) {
           primaryType = val.type.name;
         }
         type.push(val.type.name + " ");

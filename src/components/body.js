@@ -29,12 +29,12 @@ class Body extends Component {
   }
 
   render() {
-    let movesSet = this.props.pokemon.moves;
+    let movesSet = this.props.pokemon.moves.reverse();
     let moves = [];
     let learnedSet;
     let learnedLevel = [];
     let learnedMethod = [];
-    let statsSet = this.props.pokemon.stats;
+    let statsSet = this.props.pokemon.stats.reverse();
     let stats = [];
 
     movesSet.forEach(function (val, i) {

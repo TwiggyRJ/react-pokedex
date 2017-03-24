@@ -34,7 +34,7 @@
     transform: rotate(360deg); } }
 
 .bg-normal,
-.bg-black {
+.bg-dark-grey {
   background-color: #222; }
 
 .bg-white {
@@ -68,8 +68,21 @@
 .bg-electric {
   background-color: #FDD835; }
 
+.bg-ground {
+  background-color: #FFB74D; }
+
+.bg-dark,
+.bg-black {
+  background-color: #000; }
+
+.bg-ghost {
+  background-color: #5C6BC0; }
+
+.bg-flying {
+  background-color: #7E57C2; }
+
 .black {
-  color: #222; }
+  color: #000; }
 
 .white {
   color: #fff; }
