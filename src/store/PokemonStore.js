@@ -1,6 +1,17 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import { PokemonConstants } from '../constants/PokemonConstants';
 import { EventEmitter } from 'events';
+import { createStore, compose, applyMiddleware } from 'redux';
+
+let pokemonReducer = function(state, action) {
+  if (state === undefined) {
+    state = [];
+  }
+  if (action.type === 'GET_POKEMON') {
+    state.push(action.pokemon);
+  }
+  return state;
+}
 
 const CHANGE_EVENT = 'change';
 

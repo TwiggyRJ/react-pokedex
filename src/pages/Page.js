@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './loading.css';
 import pokeball from './Pokeball.svg';
-import Body from './components/body';
+import Body from '../components/body';
 
 import PokemonStore from './stores/PokemonStore';
 import { getPokeData, storeItem } from './actions/PokemonActions';

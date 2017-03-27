@@ -1,0 +1,28 @@
+.navbar {
+  .nav {
+    margin: 0px;
+    list-style: none;
+    li {
+        display: inline-block;
+        font-size: 1.5rem;
+        padding-left: 10px;
+
+        a {
+          text-decoration: none;
+          color: $white;
+        }
+    }
+  }
+}
+
+@media screen and (max-width: 1450px) {
+  .navbar {
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    margin-bottom: 20px;
+  }
+}

@@ -1,6 +1,3 @@
-@import 'partials/colours';
-@import 'partials/widths';
-
 .App {
   text-align: center;
 }
@@ -34,4 +31,8 @@
   to { transform: rotate(360deg); }
 }
 
+@import 'partials/colours';
+@import 'partials/widths';
 @import 'partials/backgrounds';
+@import 'partials/spacing';
+@import 'partials/nav';
