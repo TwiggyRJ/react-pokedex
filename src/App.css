@@ -111,22 +111,30 @@
 .margin-top-20 {
   margin-top: 20px; }
 
+.margin-left-20 {
+  margin-left: 20px; }
+
 .margin-bottom-30 {
   margin-bottom: 30px; }
 
 .margin-bottom-50 {
   margin-bottom: 50px; }
 
+.hidden {
+  overflow: hidden; }
+
 .navbar .nav {
   margin: 0px;
   list-style: none; }
-  .navbar .nav li {
-    display: inline-block;
-    font-size: 1.5rem;
-    padding-left: 10px; }
-    .navbar .nav li a {
-      text-decoration: none;
-      color: #fff; }
+
+.navbar .nav li {
+  display: inline-block;
+  font-size: 1.5rem;
+  padding-left: 10px; }
+
+.navbar .nav li a {
+  text-decoration: none;
+  color: #fff; }
 
 @media screen and (max-width: 1450px) {
   .navbar {
