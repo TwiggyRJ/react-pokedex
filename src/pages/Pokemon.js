@@ -35,7 +35,7 @@ class Pokemon extends Component {
 
   render() {
     if (this.props.pokemon !== "") {
-      let types = this.props.pokemon.types.reverse();
+      let types = this.props.pokemon.types;
       let type = [];
       let next = this.props.pokemon.id + 1;
       let prev = this.props.pokemon.id - 1;
