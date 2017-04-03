@@ -15,7 +15,7 @@ class HomePage extends Component {
     return (
       <div className="container">
         <div>Hello World</div>
-        <PokePod pokemon={ this.props.pokemon }/>
+        
       </div>
     );
   }

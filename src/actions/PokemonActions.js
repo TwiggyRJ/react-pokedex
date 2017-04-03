@@ -17,21 +17,10 @@ export const fetchPokemon = (pokemon) => {
   // Returns a dispatcher function
   // that dispatches an action at a later time
   return (dispatch) => {
-    let isCached = new Promise(function(resolve, reject) {
-      let cached = PokemonApi.getCachedPokemon(apiUrl, pokemon);
-      console.log(cached);
-      if (cached) {
-        resolve(cached);
-      } else {
-        reject(false);
-      }
-    });
-    console.log(isCached);
-    isCached.then((data) => {
-      console.log("Loading Cached Data");
-      return dispatch(fetchPokemonSuccess(isCached));
-    }).catch((error) => {
-      console.log("Fetching New Data");
+    let cache = PokemonApi.getCachedPokemon(apiUrl, pokemon);
+    cache.then(data => {
+      return dispatch(fetchPokemonSuccess(data));
+    }).catch(error => {
       return PokemonApi.getPokemon(apiUrl, pokemon).then(data => {
         dispatch(fetchPokemonSuccess(data));
       }).catch(error => {

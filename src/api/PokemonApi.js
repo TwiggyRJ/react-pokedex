@@ -65,67 +65,71 @@ class PokemonApi {
   }
 
   static getCachedPokemon(apiUrl, pokemon) {
-    let idbCheck = false;
-    let dbRequest = indexedDB.open('pokemon_app');
-    let db;
-    let key = apiUrl + pokemon;
+    return new Promise(function (resolve, reject) {
+      let idbCheck = false;
+      let dbRequest = indexedDB.open('pokemon_app');
+      let db;
+      let key = apiUrl + pokemon;
 
-    if(window.indexedDB) {
-      idbCheck = true;
-      console.log('indexedDB FTW');
+      if(window.indexedDB) {
+        idbCheck = true;
+        console.log('indexedDB FTW');
 
-      dbRequest.onupgradeneeded = function(e) {
-        console.log("running onupgradeneeded");
-        let thisDB = e.target.result;
+        dbRequest.onupgradeneeded = function(e) {
+          console.log("running onupgradeneeded");
+          let thisDB = e.target.result;
 
-        if(!thisDB.objectStoreNames.contains("pokemon")) {
-          thisDB.createObjectStore("pokemon");
-        }
-      }
-
-      dbRequest.onsuccess = function(e) {
-        console.log("Success!");
-        db = e.target.result;
-
-        let transaction = db.transaction(["pokemon"], "readonly");
-        let store = transaction.objectStore("pokemon");
-        let request = store.get(key);
-
-        request.onsuccess = function(e) {
-          let data = e.target.result;
-          if (data !== undefined) {
-            console.log("data retrieved");
-            console.log(data);
-
-            let itemCreated = new Date(data.timestamp),
-            now = new Date().getTime(),
-            lastWeek = new Date(now - 7 * 24 * 60 * 60 * 1000);
-            console.log(now);
-
-            if (itemCreated > lastWeek) {
-              console.log("lol");
-              return data;
-            } else {
-              return false;
-            }
-          } else {
-            console.log("data retrieval failed, no such result");
-            return false;
+          if(!thisDB.objectStoreNames.contains("pokemon")) {
+            thisDB.createObjectStore("pokemon");
           }
         }
 
-        request.onerror = function(e) {
-          console.log("data retrieval failed");
-        }
-      }
+        dbRequest.onsuccess = function(e) {
+          console.log("Success!");
+          db = e.target.result;
 
-      dbRequest.onerror = function(e) {
-        console.log("Error");
-        console.dir(e);
+          let transaction = db.transaction(["pokemon"], "readonly");
+          let store = transaction.objectStore("pokemon");
+          let request = store.get(key);
+
+          request.onsuccess = function(e) {
+            let data = e.target.result;
+            if (data !== undefined) {
+              console.log("data retrieved");
+              console.log(data[key]);
+
+              let itemCreated = new Date(data.timestamp),
+              now = new Date().getTime(),
+              lastWeek = new Date(now - 7 * 24 * 60 * 60 * 1000);
+              console.log(now);
+
+              if (itemCreated > lastWeek) {
+                console.log("lol");
+                resolve(data[key]);
+              } else {
+                reject(false);
+              }
+            } else {
+              console.log("data retrieval failed, no such result");
+              reject(false);
+            }
+          }
+
+          request.onerror = function(e) {
+            console.log("data retrieval failed");
+            reject(false);
+          }
+        }
+
+        dbRequest.onerror = function(e) {
+          console.log("Error");
+          console.dir(e);
+          reject(false);
+        }
+      } else {
+        reject(false);
       }
-    } else {
-      return false;
-    }
+    });
   }
 
 }

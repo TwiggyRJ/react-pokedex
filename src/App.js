@@ -4,7 +4,7 @@ import './App.css';
 import HomePage from './pages/Home';
 import Pokemon from './pages/Pokemon';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-
+import {Page, Toolbar, Button} from 'react-onsenui';
 
 class App extends Component {
 
@@ -15,16 +15,18 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
-          <nav className="full navbar bg-red pad-20 margin-bottom-50">
+        <Page>
+        <Toolbar>
+          <nav>
             <ul className="nav align-left">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/pokemon">Pokemon</Link></li>
             </ul>
           </nav>
+          </Toolbar>
           <Route exact path="/" component={ HomePage }/>
           <Route path="/pokemon" component={ Pokemon }/>
-        </div>
+        </Page>
       </BrowserRouter>
     );
   }
